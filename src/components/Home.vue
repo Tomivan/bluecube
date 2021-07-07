@@ -3,7 +3,7 @@
     <div class="top">
       <div class="input">
         <i class="fa fa-search search-icon" aria-hidden="true"></i>
-        <input type="text" placeholder="Find Something...">
+        <input type="text" placeholder="Find Something..." v-model="search">
         <button class="search"> Search </button>
       </div>
       <i class="fa fa-bell notification" aria-hidden="true"></i>
@@ -58,6 +58,7 @@ export default {
     },
     created() {
       this.getUnsplashPhotos()
+      this.searchPhotos()
   },
 
   methods: {
@@ -71,12 +72,14 @@ export default {
   if (photos) {
         this.photoUrls = photos.map(p => p.urls);
       }
-  if (photos) {
-    this.names = photos.map(p => p.user)
-  }
     })
     .catch(error => console.log('error: ', error))
   }
+  },
+  searchPhotos() {
+     const headers = { "Authorization": "Client-ID jF5H3GQKQhaKdSecL9UestPChaSxMAaUaUps5oXopbc"};
+     fetch("https://api.unsplash.com/search/photos",  { headers })
+    .then(response => response.json())
   }
 }
 
@@ -200,10 +203,10 @@ input::placeholder{
 }
 @media(min-width: 768px) and (max-width: 1024px){
   .top{
-    width: 72vw;
+    width: 65vw;
   }
   input{
-    width: 55vw;
+    width: 50vw;
   }
   .search-icon{
     margin-top: 4%;
@@ -216,10 +219,10 @@ input::placeholder{
     margin: 4% 0 0 -15%;
   }
   .profile{
-    margin-top: 1%;
+    margin-top: 2%;
   }
   .profile p{
-    margin-top: 25%;
+    margin-top: 28%;
   }
   hr{
     width: 90%;
@@ -229,7 +232,10 @@ input::placeholder{
     flex-wrap: wrap;
   }
   .box{
-    width: 15vw;
+    width: 14vw;
+  }
+  .photo{
+    width: 32vw;
   }
 }
 </style>
