@@ -236,6 +236,7 @@ input::placeholder{
   }
   .photo{
     width: 32vw;
+    height: 40vh;
   }
 }
 </style>
